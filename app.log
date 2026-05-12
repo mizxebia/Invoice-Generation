@@ -1,0 +1,58 @@
+2026-05-11 17:11:17,120 | INFO | ===== START =====
+2026-05-11 17:11:17,121 | INFO | Authenticating...
+2026-05-11 17:11:18,266 | ERROR | Traceback (most recent call last):
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 53, in get_token
+    raise Exception(token_response)
+Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'a90e57ce-bc46-48df-9fab-5c6a77e80a11'. Trace ID: 034ace8b-d745-4f40-a01d-a266bff31d00 Correlation ID: 582a954f-be57-4e3c-b4de-83263b9a76d2 Timestamp: 2026-05-11 11:41:16Z", 'error_codes': [7000215], 'timestamp': '2026-05-11 11:41:16Z', 'trace_id': '034ace8b-d745-4f40-a01d-a266bff31d00', 'correlation_id': '582a954f-be57-4e3c-b4de-83263b9a76d2', 'error_uri': 'https://login.microsoftonline.com/error?code=7000215'}
+
+2026-05-11 17:11:18,276 | CRITICAL | Traceback (most recent call last):
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 113, in main
+    token = get_token()
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 53, in get_token
+    raise Exception(token_response)
+Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'a90e57ce-bc46-48df-9fab-5c6a77e80a11'. Trace ID: 034ace8b-d745-4f40-a01d-a266bff31d00 Correlation ID: 582a954f-be57-4e3c-b4de-83263b9a76d2 Timestamp: 2026-05-11 11:41:16Z", 'error_codes': [7000215], 'timestamp': '2026-05-11 11:41:16Z', 'trace_id': '034ace8b-d745-4f40-a01d-a266bff31d00', 'correlation_id': '582a954f-be57-4e3c-b4de-83263b9a76d2', 'error_uri': 'https://login.microsoftonline.com/error?code=7000215'}
+
+2026-05-11 17:11:27,412 | INFO | ===== START =====
+2026-05-11 17:11:27,412 | INFO | Authenticating...
+2026-05-11 17:11:28,465 | ERROR | Traceback (most recent call last):
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 53, in get_token
+    raise Exception(token_response)
+Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'a90e57ce-bc46-48df-9fab-5c6a77e80a11'. Trace ID: 20ce484c-4f17-4226-b759-fe3dffbd2e00 Correlation ID: 003a8743-b5ea-495c-b2d1-596d9d368fd0 Timestamp: 2026-05-11 11:41:26Z", 'error_codes': [7000215], 'timestamp': '2026-05-11 11:41:26Z', 'trace_id': '20ce484c-4f17-4226-b759-fe3dffbd2e00', 'correlation_id': '003a8743-b5ea-495c-b2d1-596d9d368fd0', 'error_uri': 'https://login.microsoftonline.com/error?code=7000215'}
+
+2026-05-11 17:11:28,466 | CRITICAL | Traceback (most recent call last):
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 113, in main
+    token = get_token()
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 53, in get_token
+    raise Exception(token_response)
+Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'a90e57ce-bc46-48df-9fab-5c6a77e80a11'. Trace ID: 20ce484c-4f17-4226-b759-fe3dffbd2e00 Correlation ID: 003a8743-b5ea-495c-b2d1-596d9d368fd0 Timestamp: 2026-05-11 11:41:26Z", 'error_codes': [7000215], 'timestamp': '2026-05-11 11:41:26Z', 'trace_id': '20ce484c-4f17-4226-b759-fe3dffbd2e00', 'correlation_id': '003a8743-b5ea-495c-b2d1-596d9d368fd0', 'error_uri': 'https://login.microsoftonline.com/error?code=7000215'}
+
+2026-05-11 17:13:20,114 | INFO | ===== START =====
+2026-05-11 17:13:20,115 | INFO | Authenticating...
+2026-05-11 17:13:21,284 | ERROR | Traceback (most recent call last):
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 53, in get_token
+    raise Exception(token_response)
+Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'a90e57ce-bc46-48df-9fab-5c6a77e80a11'. Trace ID: 01eea8da-54b4-4acb-9e58-d37b48592f00 Correlation ID: cbc88770-6e0d-461c-afe3-330314a9d7de Timestamp: 2026-05-11 11:43:19Z", 'error_codes': [7000215], 'timestamp': '2026-05-11 11:43:19Z', 'trace_id': '01eea8da-54b4-4acb-9e58-d37b48592f00', 'correlation_id': 'cbc88770-6e0d-461c-afe3-330314a9d7de', 'error_uri': 'https://login.microsoftonline.com/error?code=7000215'}
+
+2026-05-11 17:13:21,285 | CRITICAL | Traceback (most recent call last):
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 113, in main
+    token = get_token()
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 53, in get_token
+    raise Exception(token_response)
+Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'a90e57ce-bc46-48df-9fab-5c6a77e80a11'. Trace ID: 01eea8da-54b4-4acb-9e58-d37b48592f00 Correlation ID: cbc88770-6e0d-461c-afe3-330314a9d7de Timestamp: 2026-05-11 11:43:19Z", 'error_codes': [7000215], 'timestamp': '2026-05-11 11:43:19Z', 'trace_id': '01eea8da-54b4-4acb-9e58-d37b48592f00', 'correlation_id': 'cbc88770-6e0d-461c-afe3-330314a9d7de', 'error_uri': 'https://login.microsoftonline.com/error?code=7000215'}
+
+2026-05-11 17:14:57,811 | INFO | ===== PROCESS START =====
+2026-05-11 17:14:57,811 | INFO | Authenticating to Dataverse...
+2026-05-11 17:14:59,276 | ERROR | Authentication failed
+2026-05-11 17:14:59,293 | ERROR | Traceback (most recent call last):
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 53, in get_access_token
+    raise Exception(token_response)
+Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'a90e57ce-bc46-48df-9fab-5c6a77e80a11'. Trace ID: 014cde02-9b85-4760-9f08-2a1dfb152700 Correlation ID: d2ffdba6-9f6c-462c-91f6-10231473046b Timestamp: 2026-05-11 11:44:57Z", 'error_codes': [7000215], 'timestamp': '2026-05-11 11:44:57Z', 'trace_id': '014cde02-9b85-4760-9f08-2a1dfb152700', 'correlation_id': 'd2ffdba6-9f6c-462c-91f6-10231473046b', 'error_uri': 'https://login.microsoftonline.com/error?code=7000215'}
+
+2026-05-11 17:16:24,931 | INFO | ===== PROCESS START =====
+2026-05-11 17:16:24,931 | INFO | Authenticating to Dataverse...
+2026-05-11 17:16:26,351 | ERROR | Authentication failed
+2026-05-11 17:16:26,351 | ERROR | Traceback (most recent call last):
+  File "C:\Users\RahulBudhan\OneDrive - Xebia\Desktop\Invoice Generation\main.py", line 53, in get_access_token
+    raise Exception(token_response)
+Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'a90e57ce-bc46-48df-9fab-5c6a77e80a11'. Trace ID: 1206bca5-36c3-4aad-ba9e-16c4cbbc2e00 Correlation ID: edf1f42f-0db4-484d-bd35-19ea50a4a843 Timestamp: 2026-05-11 11:46:24Z", 'error_codes': [7000215], 'timestamp': '2026-05-11 11:46:24Z', 'trace_id': '1206bca5-36c3-4aad-ba9e-16c4cbbc2e00', 'correlation_id': 'edf1f42f-0db4-484d-bd35-19ea50a4a843', 'error_uri': 'https://login.microsoftonline.com/error?code=7000215'}
+
