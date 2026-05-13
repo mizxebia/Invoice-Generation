@@ -3,6 +3,7 @@ import logging
 import traceback
 import requests
 import pandas as pd
+
 from msal import ConfidentialClientApplication
 
 
@@ -11,13 +12,13 @@ from msal import ConfidentialClientApplication
 # ==============================
 
 print("🔧 Loading config...")
-logging.info("Loading config file...")
 
 with open("config.json", "r") as f:
     config = json.load(f)
 
 auth = config["auth"]
 dv = config["dataverse"]
+storage = config["storage"]
 log_cfg = config["logging"]
 
 print("✅ Config loaded")
@@ -34,21 +35,28 @@ logging.basicConfig(
 )
 
 logger = logging.getLogger(__name__)
-logger.info("Logging initialized")
-print("✅ logger loaded")
+
+logger.info("✅ Logger initialized")
+
+print("✅ Logger loaded")
 
 
 # ==============================
 # 🔐 AUTHENTICATION
 # ==============================
 
-def get_access_token():
-    try:
-        logger.info("🔐 Starting authentication...")
+def get_access_token(scope):
 
-        authority_url = f"https://login.microsoftonline.com/{auth['tenant_id']}"
-        logger.info(f"Authority URL: {authority_url}")
-        logger.info(f"Client ID: {auth['client_id']}")
+    try:
+
+        logger.info(
+            f"🔐 Generating token for scope: {scope}"
+        )
+
+        authority_url = (
+            f"https://login.microsoftonline.com/"
+            f"{auth['tenant_id']}"
+        )
 
         app = ConfidentialClientApplication(
             auth["client_id"],
@@ -56,37 +64,52 @@ def get_access_token():
             client_credential=auth["client_secret"]
         )
 
-        logger.info("Requesting token from MSAL...")
-
         token_response = app.acquire_token_for_client(
-            scopes=[auth["scope"]]
+            scopes=[scope]
         )
 
-        logger.debug(f"Token response: {token_response}")
-
         if "access_token" not in token_response:
-            logger.error("❌ Token response missing access_token")
+
+            logger.error(token_response)
+
             raise Exception(token_response)
 
-        logger.info("✅ Authentication successful")
+        logger.info(
+            "✅ Token generated successfully"
+        )
+
         return token_response["access_token"]
 
     except Exception as e:
-        logger.error("❌ Authentication failed")
+
+        logger.error(
+            "❌ Authentication Failed"
+        )
+
         logger.error(traceback.format_exc())
-        print("❌ AUTH ERROR:", e)
+
+        print("\n❌ AUTH ERROR:")
+        print(e)
+
         return None
 
 
 # ==============================
-# 📥 FETCH DATA FUNCTION
+# 📥 FETCH DATAVERSE TABLE
 # ==============================
 
-def fetch_table(table_name, token, ticket_column, ticket_value):
+def fetch_table(
+    table_name,
+    token,
+    ticket_column,
+    ticket_value
+):
+
     try:
-        logger.info(f"📥 Fetching table: {table_name}")
-        logger.info(f"Filter column: {ticket_column}")
-        logger.info(f"Filter value: {ticket_value}")
+
+        logger.info(
+            f"📥 Fetching table: {table_name}"
+        )
 
         headers = {
             "Authorization": f"Bearer {token}",
@@ -100,119 +123,354 @@ def fetch_table(table_name, token, ticket_column, ticket_value):
             f"?$filter={ticket_column} eq '{ticket_value}'"
         )
 
-        logger.info(f"Initial API URL: {url}")
+        logger.info(f"Dataverse URL: {url}")
+
+        print("\n🌐 DATAVERSE URL:")
+        print(url)
 
         all_records = []
-        page_count = 1
 
         while url:
-            logger.info(f"➡️ Requesting page {page_count}")
-            logger.debug(f"Request URL: {url}")
 
-            response = requests.get(url, headers=headers)
+            response = requests.get(
+                url,
+                headers=headers
+            )
 
-            logger.info(f"Response status: {response.status_code}")
+            print(
+                "\n📡 Dataverse Response:",
+                response.status_code
+            )
 
             if response.status_code != 200:
-                logger.error(f"❌ API ERROR: {response.text}")
-                print("❌ API ERROR:", response.text)
+
+                logger.error(response.text)
+
+                print(
+                    "\n❌ DATAVERSE ERROR:"
+                )
+
+                print(response.text)
+
                 raise Exception(response.text)
 
             data = response.json()
 
             records = data.get("value", [])
-            logger.info(f"Records fetched this page: {len(records)}")
 
             all_records.extend(records)
-            logger.info(f"Total records so far: {len(all_records)}")
 
-            # Pagination
             url = data.get("@odata.nextLink")
 
-            if url:
-                logger.info("➡️ More pages detected (pagination)")
-            else:
-                logger.info("✅ No more pages")
-
-            page_count += 1
-
-        logger.info(f"✅ Finished fetching {table_name}. Total records: {len(all_records)}")
+        logger.info(
+            f"✅ Total Records: "
+            f"{len(all_records)}"
+        )
 
         return all_records
 
     except Exception as e:
-        logger.error(f"❌ Error fetching table: {table_name}")
+
+        logger.error(
+            f"❌ FETCH ERROR ({table_name})"
+        )
+
         logger.error(traceback.format_exc())
-        print(f"❌ FETCH ERROR ({table_name}):", e)
-        return []
+
+        print(
+            f"\n❌ FETCH ERROR ({table_name}):"
+        )
+
+        print(e)
+
+        raise
 
 
 # ==============================
-# 🚀 MAIN FUNCTION
+# 📁 FETCH ONEDRIVE FILE
+# ==============================
+
+def get_onedrive_file(
+    token,
+    user_email,
+    file_path
+):
+
+    try:
+
+        logger.info(
+            "📁 Fetching OneDrive File"
+        )
+
+        headers = {
+            "Authorization": f"Bearer {token}"
+        }
+
+        # CORRECT GRAPH FORMAT
+        url = (
+            f"https://graph.microsoft.com/v1.0/"
+            f"users/{user_email}"
+            f"/drive/root:/{file_path}:/"
+        )
+
+        logger.info(f"Graph URL: {url}")
+
+        print("\n🌐 GRAPH URL:")
+        print(url)
+
+        response = requests.get(
+            url,
+            headers=headers
+        )
+
+        print(
+            "\n📡 Graph Response:",
+            response.status_code
+        )
+
+        if response.status_code != 200:
+
+            logger.error(response.text)
+
+            print(
+                "\n❌ OneDrive ERROR:"
+            )
+
+            print(response.text)
+
+            raise Exception(response.text)
+
+        data = response.json()
+
+        logger.info(
+            "✅ OneDrive File Found"
+        )
+
+        print(
+            "\n✅ TEMPLATE FILE FOUND"
+        )
+
+        print("📄 File Name :", data["name"])
+        print("🆔 File ID   :", data["id"])
+
+        return data
+
+    except Exception as e:
+
+        logger.error(
+            "❌ OneDrive Fetch Failed"
+        )
+
+        logger.error(traceback.format_exc())
+
+        print(
+            "\n❌ ONEDRIVE FETCH ERROR:"
+        )
+
+        print(e)
+
+        raise
+
+
+# ==============================
+# 🚀 MAIN
 # ==============================
 
 def main():
+
     try:
-        logger.info("🚀 ===== PROCESS START =====")
 
-        # Step 1: Auth
-        logger.info("Step 1: Authentication")
-        token = get_access_token()
+        logger.info(
+            "🚀 ===== PROCESS START ====="
+        )
 
-        if not token:
-            logger.error("❌ Token is None, stopping execution")
-            return None, None
+        # ==============================
+        # STEP 1: GENERATE TOKENS
+        # ==============================
 
-        logger.info("Step 2: Reading config values")
+        print(
+            "\n🔐 Generating Dataverse Token..."
+        )
 
-        ticket_column = dv["columns"]["ticket_id"]
-        ticket_value = dv["filter"]["ticket_id"]
+        dv_token = get_access_token(
+            auth["dataverse_scope"]
+        )
 
-        logger.info(f"Ticket column: {ticket_column}")
-        logger.info(f"Ticket value: {ticket_value}")
+        if not dv_token:
 
-        # Step 3: Fetch tables
-        logger.info("Step 3: Fetching closing ticket details")
+            raise Exception(
+                "Dataverse token failed"
+            )
+
+        print(
+            "✅ Dataverse Token Generated"
+        )
+
+        print(
+            "\n🔐 Generating Graph Token..."
+        )
+
+        graph_token = get_access_token(
+            auth["graph_scope"]
+        )
+
+        if not graph_token:
+
+            raise Exception(
+                "Graph token failed"
+            )
+
+        print(
+            "✅ Graph Token Generated"
+        )
+
+        # ==============================
+        # STEP 2: READ CONFIG VALUES
+        # ==============================
+
+        ticket_column = (
+            dv["columns"]["ticket_id"]
+        )
+
+        ticket_value = (
+            dv["filter"]["ticket_id"]
+        )
+
+        invoice_template_path = (
+            storage["paths"]
+            ["invoice_template_path"]
+        )
+
+        # IMPORTANT FIX
+        user_email = (
+            storage["user_email_dev"]
+        )
+
+        print(
+            "\n📄 Ticket Column:",
+            ticket_column
+        )
+
+        print(
+            "📄 Ticket Value :",
+            ticket_value
+        )
+
+        print(
+            "\n📁 Template Path:",
+            invoice_template_path
+        )
+
+        print(
+            "\n👤 OneDrive User:",
+            user_email
+        )
+
+        # ==============================
+        # STEP 3: FETCH TEMPLATE FILE
+        # ==============================
+
+        template_file = get_onedrive_file(
+            graph_token,
+            user_email,
+            invoice_template_path
+        )
+
+        # ==============================
+        # STEP 4: FETCH DATAVERSE TABLES
+        # ==============================
+
+        print(
+            "\n📥 Fetching Closing Ticket Details..."
+        )
 
         closing_ticket_data = fetch_table(
             dv["tables"]["closing_ticket_details"],
-            token,
+            dv_token,
             ticket_column,
             ticket_value
         )
 
-        logger.info("Step 4: Fetching invoice details")
+        print(
+            "✅ Closing Ticket Details Retrieved"
+        )
+
+        print(
+            "\n📥 Fetching Invoice Details..."
+        )
 
         invoice_data = fetch_table(
             dv["tables"]["invoice_details"],
-            token,
+            dv_token,
             ticket_column,
             ticket_value
         )
 
-        # Step 5: Convert to DataFrames
-        logger.info("Step 5: Converting to DataFrames")
+        print(
+            "✅ Invoice Details Retrieved"
+        )
 
-        df_closing_ticket_details = pd.DataFrame(closing_ticket_data)
-        df_invoice_details = pd.DataFrame(invoice_data)
+        # ==============================
+        # STEP 5: CREATE DATAFRAMES
+        # ==============================
 
-        logger.info(f"Closing Ticket DF shape: {df_closing_ticket_details.shape}")
-        logger.info(f"Invoice DF shape: {df_invoice_details.shape}")
+        df_closing_ticket_details = (
+            pd.DataFrame(
+                closing_ticket_data
+            )
+        )
 
-        print("\n=== CLOSING TICKET DETAILS ===")
-        print(df_closing_ticket_details.head())
+        df_invoice_details = (
+            pd.DataFrame(
+                invoice_data
+            )
+        )
 
-        print("\n=== INVOICE DETAILS ===")
-        print(df_invoice_details.head())
+        print(
+            "\n=== CLOSING TICKET DETAILS ==="
+        )
 
-        logger.info("✅ ===== PROCESS COMPLETE =====")
+        print(
+            df_closing_ticket_details.head()
+        )
 
-        return df_closing_ticket_details, df_invoice_details
+        print(
+            "\n=== INVOICE DETAILS ==="
+        )
+
+        print(
+            df_invoice_details.head()
+        )
+
+        logger.info(
+            "✅ ===== PROCESS COMPLETE ====="
+        )
+
+        print(
+            "\n✅ ALL OPERATIONS COMPLETED"
+        )
+
+        return (
+            df_closing_ticket_details,
+            df_invoice_details
+        )
 
     except Exception as e:
-        logger.critical("❌ Fatal error in main()")
-        logger.critical(traceback.format_exc())
-        print("❌ MAIN ERROR:", e)
+
+        logger.critical(
+            "❌ MAIN PROCESS FAILED"
+        )
+
+        logger.critical(
+            traceback.format_exc()
+        )
+
+        print(
+            "\n❌ MAIN ERROR:"
+        )
+
+        print(e)
+
         return None, None
 
 
@@ -221,13 +479,5 @@ def main():
 # ==============================
 
 if __name__ == "__main__":
-    logger.info("Script execution started")
 
-    df_closing_ticket_details, df_invoice_details = main()
-
-    if df_closing_ticket_details is None:
-        logger.error("Script failed")
-        print("\n❌ Script failed. Check app.log for details.")
-    else:
-        logger.info("Script completed successfully")
-        print("\n✅ Data fetched successfully!")
+    main()

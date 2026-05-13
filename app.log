@@ -56,3 +56,145 @@ Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Inva
     raise Exception(token_response)
 Exception: {'error': 'invalid_client', 'error_description': "AADSTS7000215: Invalid client secret provided. Ensure the secret being sent in the request is the client secret value, not the client secret ID, for a secret added to app 'a90e57ce-bc46-48df-9fab-5c6a77e80a11'. Trace ID: 1206bca5-36c3-4aad-ba9e-16c4cbbc2e00 Correlation ID: edf1f42f-0db4-484d-bd35-19ea50a4a843 Timestamp: 2026-05-11 11:46:24Z", 'error_codes': [7000215], 'timestamp': '2026-05-11 11:46:24Z', 'trace_id': '1206bca5-36c3-4aad-ba9e-16c4cbbc2e00', 'correlation_id': 'edf1f42f-0db4-484d-bd35-19ea50a4a843', 'error_uri': 'https://login.microsoftonline.com/error?code=7000215'}
 
+2026-05-13 17:10:19,842 | INFO | \u2705 Logger initialized
+2026-05-13 17:10:19,843 | INFO | \U0001f680 ===== PROCESS START =====
+2026-05-13 17:10:19,843 | CRITICAL | \u274c MAIN PROCESS FAILED
+2026-05-13 17:10:19,844 | CRITICAL | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 267, in main
+    auth["dataverse_scope"]
+KeyError: 'dataverse_scope'
+
+2026-05-13 17:11:42,340 | INFO | \u2705 Logger initialized
+2026-05-13 17:11:42,341 | INFO | \U0001f680 ===== PROCESS START =====
+2026-05-13 17:11:42,341 | INFO | \U0001f510 Generating token for scope: https://orgbe15f1ab.crm.dynamics.com/.default
+2026-05-13 17:11:44,125 | INFO | \u2705 Token generated successfully
+2026-05-13 17:11:44,126 | INFO | \U0001f510 Generating token for scope: https://graph.microsoft.com/.default
+2026-05-13 17:11:45,988 | INFO | \u2705 Token generated successfully
+2026-05-13 17:11:45,989 | INFO | \U0001f4c1 Fetching OneDrive File
+2026-05-13 17:11:45,989 | INFO | Graph URL: https://graph.microsoft.com/v1.0/users/akambotleaserenewal@akam.com/drive/root:/New Sales RPA/DEV/Excel Sheets/Closing Forms deposits.xlsx
+2026-05-13 17:11:47,469 | INFO | Graph Response: 404
+2026-05-13 17:11:47,469 | ERROR | {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+2026-05-13 17:11:47,469 | ERROR | \u274c OneDrive Fetch Failed
+2026-05-13 17:11:47,472 | ERROR | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 219, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:11:47,472 | CRITICAL | \u274c MAIN PROCESS FAILED
+2026-05-13 17:11:47,473 | CRITICAL | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 321, in main
+    template_file = get_onedrive_file(
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 219, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:12:21,695 | INFO | \u2705 Logger initialized
+2026-05-13 17:12:21,695 | INFO | \U0001f680 ===== PROCESS START =====
+2026-05-13 17:12:21,695 | INFO | \U0001f510 Generating token for scope: https://orgbe15f1ab.crm.dynamics.com/.default
+2026-05-13 17:12:23,311 | INFO | \u2705 Token generated successfully
+2026-05-13 17:12:23,312 | INFO | \U0001f510 Generating token for scope: https://graph.microsoft.com/.default
+2026-05-13 17:12:25,163 | INFO | \u2705 Token generated successfully
+2026-05-13 17:12:25,164 | INFO | \U0001f4c1 Fetching OneDrive File
+2026-05-13 17:12:25,165 | INFO | Graph URL: https://graph.microsoft.com/v1.0/users/akambotleaserenewal@akam.com/drive/root:/New Sales RPA/DEV/Excel%Sheets/Closing%Forms%deposits.xlsx
+2026-05-13 17:12:26,691 | INFO | Graph Response: 404
+2026-05-13 17:12:26,691 | ERROR | {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+2026-05-13 17:12:26,692 | ERROR | \u274c OneDrive Fetch Failed
+2026-05-13 17:12:26,694 | ERROR | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 219, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:12:26,694 | CRITICAL | \u274c MAIN PROCESS FAILED
+2026-05-13 17:12:26,695 | CRITICAL | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 321, in main
+    template_file = get_onedrive_file(
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 219, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:14:38,348 | INFO | \u2705 Logger initialized
+2026-05-13 17:14:38,349 | INFO | \U0001f680 ===== PROCESS START =====
+2026-05-13 17:14:38,349 | INFO | \U0001f510 Generating token for scope: https://orgbe15f1ab.crm.dynamics.com/.default
+2026-05-13 17:14:40,019 | INFO | \u2705 Token generated successfully
+2026-05-13 17:14:40,020 | INFO | \U0001f510 Generating token for scope: https://graph.microsoft.com/.default
+2026-05-13 17:14:41,563 | INFO | \u2705 Token generated successfully
+2026-05-13 17:14:41,564 | INFO | \U0001f4c1 Fetching OneDrive File
+2026-05-13 17:14:41,564 | INFO | Graph URL: https://graph.microsoft.com/v1.0/users/akambotleaserenewal@akam.com/drive/root:/Documents/New Sales RPA/DEV/Excel Sheets/Closing Forms deposits.xlsx
+2026-05-13 17:14:44,126 | INFO | Graph Response: 404
+2026-05-13 17:14:44,126 | ERROR | {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+2026-05-13 17:14:44,126 | ERROR | \u274c OneDrive Fetch Failed
+2026-05-13 17:14:44,127 | ERROR | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 219, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:14:44,127 | CRITICAL | \u274c MAIN PROCESS FAILED
+2026-05-13 17:14:44,128 | CRITICAL | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 321, in main
+    template_file = get_onedrive_file(
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 219, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:31:35,445 | INFO | \u2705 Logger initialized
+2026-05-13 17:31:35,445 | INFO | \U0001f680 ===== PROCESS START =====
+2026-05-13 17:31:35,445 | INFO | \U0001f510 Generating token for scope: https://orgbe15f1ab.crm.dynamics.com/.default
+2026-05-13 17:31:36,284 | INFO | \u2705 Token generated successfully
+2026-05-13 17:31:36,284 | INFO | \U0001f510 Generating token for scope: https://graph.microsoft.com/.default
+2026-05-13 17:31:37,156 | INFO | \u2705 Token generated successfully
+2026-05-13 17:31:37,156 | INFO | \U0001f4c1 Fetching OneDrive File
+2026-05-13 17:31:37,156 | INFO | Graph URL: https://graph.microsoft.com/v1.0/users/akambotleaserenewal@akam.com/drive/root:/Documents/New Sales RPA/DEV/Excel Sheets/Closing Forms deposits.xlsx:/
+2026-05-13 17:31:38,755 | ERROR | {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+2026-05-13 17:31:38,755 | ERROR | \u274c OneDrive Fetch Failed
+2026-05-13 17:31:38,755 | ERROR | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 240, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:31:38,755 | CRITICAL | \u274c MAIN PROCESS FAILED
+2026-05-13 17:31:38,755 | CRITICAL | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 366, in main
+    template_file = get_onedrive_file(
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 240, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:33:30,893 | INFO | \u2705 Logger initialized
+2026-05-13 17:33:30,895 | INFO | \U0001f680 ===== PROCESS START =====
+2026-05-13 17:33:30,895 | INFO | \U0001f510 Generating token for scope: https://orgbe15f1ab.crm.dynamics.com/.default
+2026-05-13 17:33:31,827 | INFO | \u2705 Token generated successfully
+2026-05-13 17:33:31,827 | INFO | \U0001f510 Generating token for scope: https://graph.microsoft.com/.default
+2026-05-13 17:33:32,760 | INFO | \u2705 Token generated successfully
+2026-05-13 17:33:32,760 | INFO | \U0001f4c1 Fetching OneDrive File
+2026-05-13 17:33:32,760 | INFO | Graph URL: https://graph.microsoft.com/v1.0/users/akambotdev1@akam.com/drive/root:/Documents/New Sales RPA/DEV/Excel Sheets/Closing Forms deposits.xlsx:/
+2026-05-13 17:33:35,226 | ERROR | {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+2026-05-13 17:33:35,228 | ERROR | \u274c OneDrive Fetch Failed
+2026-05-13 17:33:35,230 | ERROR | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 241, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:33:35,230 | CRITICAL | \u274c MAIN PROCESS FAILED
+2026-05-13 17:33:35,232 | CRITICAL | Traceback (most recent call last):
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 373, in main
+    template_file = get_onedrive_file(
+  File "C:\Users\MizzanUrRehman\Desktop\Invoice Generation\main.py", line 241, in get_onedrive_file
+    raise Exception(response.text)
+Exception: {"error":{"code":"itemNotFound","message":"The resource could not be found."}}
+
+2026-05-13 17:35:35,345 | INFO | \u2705 Logger initialized
+2026-05-13 17:35:35,345 | INFO | \U0001f680 ===== PROCESS START =====
+2026-05-13 17:35:35,345 | INFO | \U0001f510 Generating token for scope: https://orgbe15f1ab.crm.dynamics.com/.default
+2026-05-13 17:35:36,375 | INFO | \u2705 Token generated successfully
+2026-05-13 17:35:36,375 | INFO | \U0001f510 Generating token for scope: https://graph.microsoft.com/.default
+2026-05-13 17:35:37,410 | INFO | \u2705 Token generated successfully
+2026-05-13 17:35:37,410 | INFO | \U0001f4c1 Fetching OneDrive File
+2026-05-13 17:35:37,425 | INFO | Graph URL: https://graph.microsoft.com/v1.0/users/akambotdev1@akam.com/drive/root:/New Sales RPA/DEV/Excel Sheets/Closing Forms deposits.xlsx:/
+2026-05-13 17:35:38,092 | INFO | \u2705 OneDrive File Found
+2026-05-13 17:35:38,097 | INFO | \U0001f4e5 Fetching table: cr7de_closingticketdetailses
+2026-05-13 17:35:38,097 | INFO | Dataverse URL: https://orgbe15f1ab.crm.dynamics.com/api/data/v9.2/cr7de_closingticketdetailses?$filter=cr7de_ticketid eq 'CL-064556665'
+2026-05-13 17:35:39,861 | INFO | \u2705 Total Records: 1
+2026-05-13 17:35:39,871 | INFO | \U0001f4e5 Fetching table: cr7de_invoicedetailses
+2026-05-13 17:35:39,871 | INFO | Dataverse URL: https://orgbe15f1ab.crm.dynamics.com/api/data/v9.2/cr7de_invoicedetailses?$filter=cr7de_ticketid eq 'CL-064556665'
+2026-05-13 17:35:41,146 | INFO | \u2705 Total Records: 1
+2026-05-13 17:35:41,193 | INFO | \u2705 ===== PROCESS COMPLETE =====
